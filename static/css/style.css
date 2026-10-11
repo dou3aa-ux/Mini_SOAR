@@ -1,7 +1,7 @@
 :root {
     color-scheme: dark;
-    font-family: "Segoe UI", Arial, sans-serif;
-    background: #0b1120;
+    font-family: Arial, sans-serif;
+    background: #d5e0fe;
     color: #e5e7eb;
 }
 
@@ -11,9 +11,12 @@
 
 body {
     margin: 0;
-    background:
-        radial-gradient(ellipse at top left, #15233c 0, transparent 42%),
-        #0b1120;
+    background-color: #d5e0fe;
+    background-image:
+        linear-gradient(to right, rgba(148, 163, 184, 0.15) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(148, 163, 184, 0.15) 1px, transparent 1px),
+        radial-gradient(ellipse at top left, #f5f5f6 0, transparent 42%);
+    background-size: 40px 40px, 40px 40px, auto;
     min-height: 100vh;
 }
 
@@ -24,7 +27,7 @@ body {
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid #253147;
-    background: #0b1120cc;
+    background: #111a2b;
 }
 
 .brand {
@@ -45,7 +48,7 @@ body {
     height: 8px;
     margin-right: 7px;
     border-radius: 50%;
-    background: #34d399;
+    background: #1fcc8d;
 }
 
 .container {
@@ -58,7 +61,7 @@ body {
 }
 
 .eyebrow {
-    color: #60a5fa;
+    color: #1569cf;
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 0.15em;
@@ -66,14 +69,14 @@ body {
 
 h1 {
     margin: 8px 0;
-    color: #f8fafc;
+    color: #0b243c;
     font-size: clamp(28px, 4vw, 38px);
 }
 
 .subtitle,
 .stat-card span,
 .panel-heading span {
-    color: #94a3b8;
+    color: #7b8a9e;
 }
 
 .stats {
@@ -86,7 +89,7 @@ h1 {
 .stat-card,
 .panel {
     border: 1px solid #253147;
-    border-radius: 12px;
+    border-radius: 5px;
     background: #111a2b;
 }
 
@@ -105,6 +108,17 @@ h1 {
     font-size: 30px;
 }
 
+/* High Severity Card Styling */
+.stat-card.stat-card-high span,
+.stat-card.stat-card-high strong {
+    color: #ef4444; /* Bright red */
+}
+
+/* Medium Severity Card Styling */
+.stat-card.stat-card-medium span,
+.stat-card.stat-card-medium strong {
+    color: #f59e0b; /* Orange/amber */
+}
 .panel {
     overflow: hidden;
 }
@@ -158,8 +172,8 @@ td {
 
 .badge {
     display: inline-block;
-    padding: 4px 8px;
-    border-radius: 999px;
+    padding: 6px 16px;
+    border-radius: 400px;
     font-size: 11px;
     font-weight: 700;
 }
@@ -203,7 +217,7 @@ td {
 .back-link {
     display: inline-block;
     margin-bottom: 24px;
-    color: #93c5fd;
+    color: #0c70e4;
     text-decoration: none;
 }
 
