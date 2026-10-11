@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard · Mini IDS{% endblock %}
+
+{% block content %}
+<section class="page-heading">
+    <div>
+        <p class="eyebrow">NETWORK MONITORING</p>
+        <h1>Security dashboard</h1>
+        <p class="subtitle">Alerts saved from your PCAP analysis.</p>
+    </div>
+</section>
+
+<section class="stats">
+    <article class="stat-card">
+        <span>Total alerts</span>
+        <strong>{{ stats.total }}</strong>
+    </article>
+    <article class="stat-card">
+        <span>High severity</span>
+        <strong>{{ stats.high }}</strong>
+    </article>
+    <article class="stat-card">
+        <span>Medium severity</span>
+        <strong>{{ stats.medium }}</strong>
+    </article>
+</section>
+
+<section class="panel">
+    <div class="panel-heading">
+        <h2>Recent alerts</h2>
+        <span>{{ alerts|length }} shown</span>
+    </div>
+
+    {% if alerts %}
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Severity</th>
+                    <th>Source</th>
+                    <th>Destination</th>
+                    <th>Time (UTC)</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for alert in alerts %}
+                <tr>
+                <td>
+                    <a class="alert-link"
+                    href="{{ url_for('alert_detail', alert_id=alert.id) }}">
+                    {{ alert.alert_type|replace("_", " ")|title }}
+                    </a>
+                </td>
+                <td>
+                        <span class="badge {{ alert.severity|lower }}">
+                            {{ alert.severity|upper }}
+                        </span>
+                    </td>
+                    <td>{{ alert.source_ip or "—" }}</td>
+                    <td>{{ alert.destination_ip or "—" }}</td>
+                    <td>{{ alert.created_at }}</td>
+                    <td>{{ alert.description }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <p class="empty-state">No alerts are saved yet. Analyze a PCAP to get started.</p>
+    {% endif %}
+</section>
+{% endblock %}

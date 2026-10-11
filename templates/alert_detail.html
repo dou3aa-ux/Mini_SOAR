@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Alert Details · Mini IDS{% endblock %}
+
+{% block content %}
+<a class="back-link" href="{{ url_for('dashboard') }}">← Back to dashboard</a>
+
+<section class="page-heading">
+    <p class="eyebrow">ALERT #{{ alert.id }}</p>
+    <h1>{{ alert.alert_type|replace("_", " ")|title }}</h1>
+    <span class="badge {{ alert.severity|lower }}">
+        {{ alert.severity|upper }}
+    </span>
+</section>
+
+<section class="panel detail-panel">
+    <h2>Summary</h2>
+    <p>{{ alert.description }}</p>
+
+    <div class="detail-grid">
+        <div>
+            <span>Source IP</span>
+            <strong>{{ alert.source_ip or "—" }}</strong>
+        </div>
+        <div>
+            <span>Destination IP</span>
+            <strong>{{ alert.destination_ip or "—" }}</strong>
+        </div>
+        <div>
+            <span>Detected at (UTC)</span>
+            <strong>{{ alert.created_at }}</strong>
+        </div>
+    </div>
+</section>
+
+{% if alert.details.ports %}
+<section class="panel detail-panel">
+    <h2>Scanned destination ports</h2>
+    <div class="port-list">
+        {% for port in alert.details.ports %}
+        <span>{{ port }}</span>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+<section class="panel detail-panel">
+    <h2>Full alert data</h2>
+    <pre class="detail-json">{{ alert.details|tojson(indent=2) }}</pre>
+</section>
+{% endblock %}
